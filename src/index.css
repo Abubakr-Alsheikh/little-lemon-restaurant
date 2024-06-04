@@ -1,13 +1,319 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+/* General Styling */
+body {
+  font-family: "Helvetica", "Arial", sans-serif;
+  margin: 0;
+  color: #333;
+}
+
+/* Reusable Styles */
+.container {
+  /* Use this for consistent content widths */
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+  color: #f4ce14; /* Yellow headings */
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+h3 {
+  font-size: 1.875rem;
+  margin-bottom: 0.6rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Navigation - Flexbox */
+header {
+  background-color: #fff;
+  padding: 1rem;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+nav li a:hover {
+  background-color: #f9f9f9;
+}
+
+/* Hero Section - Flexbox */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 0; /* Adjusted padding */
+  color: #333; /* White text on hero */
+  background-color: #4c6043;
+}
+
+.hero .container {
+  /* Apply container width */
+  text-align: center;
+  display: flex;
+}
+
+.hero img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    text-align: left;
+    padding: 4rem 0; /* Adjusted padding */
+  }
+
+  .hero .container {
+    text-align: left; /* Reset text alignment for larger screens */
+  }
+
+  .hero > * {
+    flex: 1;
+  }
+
+  .hero img {
+    margin-bottom: 0;
+    margin-left: 2rem;
+  }
+}
+
+/* Specials Section - Grid */
+.specials {
+  background-color: #f8f8f8;
+  padding: 3rem 0;
+}
+
+.specials .container {
+  text-align: center;
+}
+
+.specials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.special-item {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: left; /* Align text to the left */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+}
+
+.special-item img {
+  max-width: 100%;
+  height: 150px; /* Fixed height for specials images */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.special-item .price {
+  /* Style the price */
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #f4ce14; /* Yellow price */
+  margin-bottom: 1rem;
+  display: block; /* Ensures the price takes up its own line */
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 3rem 0;
+  color: #333;
+  background-color: #4c6043; /* Darker green for testimonials */
+}
+
+.testimonials .container {
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: flex;
+  flex-direction: column; /* Stack vertically initially */
+  gap: 2rem;
+}
+
+.testimonial-item {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Align text to the left */
+}
+
+/* Add styles for rating stars if needed */
+.testimonial-item .rating {
+  /* Example */
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.testimonial-item .rating svg {
+  /* Assuming SVG stars */
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #f4ce14; /* Filled stars are yellow */
+}
+
+.testimonial-item .quote {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.testimonial-item .author {
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .testimonials-grid {
+    flex-direction: row;
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+  }
+}
+
+/* About Section - Flexbox */
+.about {
+  padding: 3rem 0;
+}
+
+.about .container {
+  display: flex;
+  flex-direction: column; /* Stack vertically initially */
+  align-items: center; /* Center content horizontally */
+}
+
+.about img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 2rem; /* Space between image and text */
+}
+
+@media (min-width: 768px) {
+  .about .container {
+    flex-direction: row;
+    align-items: flex-start; /* Align items to the top */
+  }
+
+  .about img {
+    margin-bottom: 0;
+    margin-right: 2rem; /* Space between image and text */
+  }
+}
+
+/* Footer - Flexbox */
+footer {
+  background-color: #4c6043;
+  color: white;
+  padding: 2rem 0;
+  text-align: center; /* Center text initially */
+}
+
+.footer .container {
+  display: flex;
+  flex-direction: row; /* Stack columns vertically */
+  gap: 2rem;
+}
+
+.footer .footer-content {
+  display: flex;
+  flex-direction: row; /* Stack columns vertically */
+  gap: 2rem;
+}
+
+.footer > * {
+  /* Target direct children */
+  margin-bottom: 1rem;
+}
+
+.footer h3 {
+  color: #f4ce14; /* Yellow footer headings */
+}
+
+.footer ul {
+  /* Style footer lists */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer li {
+  margin-bottom: 0.5rem;
+}
+
+.footer a {
+  /* Style footer links */
+  color: white;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  footer {
+    text-align: left; /* Left align text on larger screens */
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between; /* Distribute columns evenly */
+    align-items: flex-start;
+  }
+
+  .footer > * {
+    margin-bottom: 0;
+  }
 }

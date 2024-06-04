@@ -12,13 +12,12 @@ const Header = () => {
     ];
 
     return (
-    <header>
-        <nav>
+        <header className='container'>
             {/* Assuming you have a logo image named "logo.png" in your public folder */}
-            <img src="/logo.png" alt="Little Lemon Logo" /> 
+            <img src="/logo.png" alt="Little Lemon Logo" />
             <Nav navLinks={navLinks} />
-        </nav>
-    </header>
+        </header>
+    )
 }
 
 export default Header
