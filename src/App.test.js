@@ -1,8 +1,63 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { reducer, initialState } from './App'; // Adjust the path as needed
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+// Mock the fetchAPI function for testing 
+jest.mock('./api', () => ({
+  fetchAPI: (date) => { 
+    // Return sample data, you can customize this based on your needs
+    return ['17:00', '18:00', '19:00'];
+  },
+  // ... other mocked API functions if needed 
+}));
+
+describe('timesReducer', () => {
+  test('initializeTimes should return the initial state', () => {
+    const result = reducer(undefined, {});
+    expect(result).toEqual(initialState); // Should be the initial (empty) state
+  });
+
+  test('updateTimes should update availableTimes with fetched data', () => {
+    const selectedDate = '2023-11-10'; 
+    const action = { type: 'UPDATE_TIMES', payload: selectedDate };
+
+    const result = reducer(initialState, action); 
+    // Assertion is now synchronous:
+    expect(result.availableTimes).toEqual(['17:00', '18:00', '19:00']); 
+  });
+
+  // ... add more tests for other reducer cases ... 
+});
+
+
+// Mock localStorage
+Object.defineProperty(window, 'localStorage', {
+  value: {
+    getItem: jest.fn(() => null), // Initially no data
+    setItem: jest.fn(() => null),
+  },
+  writable: true,
+});
+
+describe('timesReducer - Local Storage', () => {
+  test('should save bookings to localStorage', () => {
+    const newBooking = [{ date: '2023-12-01', time: '18:00', guests: 2, occasion: 'Birthday' }];
+    const action = { type: 'MAKE_BOOKING', payload: newBooking };
+
+    reducer(initialState, action);
+
+    // Check if localStorage.setItem was called with the correct key and data
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      'bookings',
+      JSON.stringify([newBooking]) 
+    );
+  });
+
+  test('should load bookings from localStorage', () => {
+    const storedBookings = [{ date: '2023-12-05', time: '20:00', guests: 4, occasion: 'Anniversary' }];
+    localStorage.getItem.mockReturnValueOnce(JSON.stringify(storedBookings)); // Mock the return value
+
+    const action = { type: 'LOAD_BOOKINGS', payload: storedBookings }; 
+    const result = reducer(initialState, action);
+
+    expect(result.bookings).toEqual(storedBookings); 
+  });
 });

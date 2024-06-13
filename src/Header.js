@@ -14,7 +14,6 @@ const Header = () => {
 
     return (
         <header className='container'>
-            {/* Assuming you have a logo image named "logo.png" in your public folder */}
             <Link to="/">
                 <img src="/logo.png" alt="Little Lemon Logo" />
             </Link>
