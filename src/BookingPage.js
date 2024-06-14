@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const BookingPage = ({ availableTimes, dispatchTimes, bookings, submitForm }) => {
   const [bookingData, setBookingData] = useState({
-    date: new Date().toISOString().slice(0, 10),
+    date: '', // new Date().toISOString().slice(0, 10)
     time: availableTimes[0] || "17:00",
     guests: 1,
     occasion: "Birthday",
