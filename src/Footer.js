@@ -1,10 +1,11 @@
 import React from "react";
+import logo from './assest/logo.jpg'
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
-        <img src="/logo.png" alt="Little Lemon Logo" />
+        <img src={logo} width={256} alt="Little Lemon Logo" />
 
         <div className="footer-content">
           <div className="navigation">
@@ -64,6 +65,9 @@ const Footer = () => {
             </ul>
           </div>
         </div>
+      </div>
+      <div style={{textAlign:"center"}}>
+        &copy;2024 Little Lemon - Abubakr Alsheikh
       </div>
     </footer>
   );

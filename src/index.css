@@ -25,11 +25,18 @@ body {
   margin: 0 auto;
   padding: 2rem;
 }
+@media (max-width: 767px) {
+  .container {
+    /* Use this for consistent content widths */
+    padding: 1rem;
+  }
+}
 
 /* Typography */
 h1,
 h2,
 h3 {
+  margin: 0;
   color: #f4ce14; /* Yellow headings */
 }
 
@@ -53,20 +60,41 @@ p {
   line-height: 1.5;
   margin-bottom: 1rem;
 }
-
-/* Navigation - Flexbox */
+button {
+  background: rgb(245, 211, 42);
+  padding: 0.7rem 1.1rem;
+  border: 1px solid rgb(245, 211, 42);
+  border-radius: 8px;
+  color: #4c6043;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  color: rgb(245, 211, 42);
+  background-color: white;
+}
+/* Header.css */
 header {
   background-color: #fff;
   padding: 1rem;
-  
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+nav button {
+  display: none;
+}
+
 nav ul {
   display: flex;
-  gap: 3rem;
+  gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -84,13 +112,70 @@ nav li a:hover {
   background-color: #f9f9f9;
 }
 
+/* Mobile Responsive Styling */
+@media screen and (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 1rem 0;
+    border-top: 1px solid;
+    font-size: 1.2rem;
+  }
+  nav button {
+    display: block;
+  }
+  nav ul.show {
+    display: flex;
+  }
+
+  nav li {
+    margin-bottom: 1rem;
+  }
+
+  .nav-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    width: 30px;
+    height: 20px;
+    margin-left: auto;
+  }
+
+  .nav-toggle .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    margin: 5px auto;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-toggle.show .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .nav-toggle.show .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.show .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
 /* Hero Section - Flexbox */
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 3rem 0; /* Adjusted padding */
+  padding: 1rem 0; /* Adjusted padding */
   color: #333; /* White text on hero */
   background-color: #4c6043;
 }
@@ -99,24 +184,38 @@ nav li a:hover {
   /* Apply container width */
   text-align: center;
   display: flex;
+  justify-content: space-between;
+  flex-direction: column-reverse;
+}
+.hero .container div:first-child h1 {
+  font-size: 2rem;
+  margin-bottom: 0.1rem;
+}
+.hero .container div:first-child h2 {
+  color: #d3d3d3;
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
 }
 
+.hero .container div:first-child p {
+  font-size: 1rem;
+  color: white;
+}
 .hero img {
+  margin-bottom: 1rem;
   max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 2rem;
+  border-radius: 16px;
 }
 
 @media (min-width: 768px) {
   .hero {
-    flex-direction: row;
     text-align: left;
-    padding: 4rem 0; /* Adjusted padding */
+    padding: 1rem 0; /* Adjusted padding */
   }
 
   .hero .container {
     text-align: left; /* Reset text alignment for larger screens */
+    flex-direction: row;
   }
 
   .hero > * {
@@ -126,6 +225,12 @@ nav li a:hover {
   .hero img {
     margin-bottom: 0;
     margin-left: 2rem;
+  }
+  .hero .container div:first-child h1 {
+    font-size: 5rem;
+  }
+  .hero .container div:first-child h2 {
+    font-size: 2rem;
   }
 }
 
@@ -138,24 +243,37 @@ nav li a:hover {
 .specials .container {
   text-align: center;
 }
-
-.specials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+.specials .container > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 1rem;
 }
-
+.specials-grid {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem; */
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+@media (max-width: 767px) {
+  .specials-grid {
+    flex-direction: column;
+  }
+}
 .special-item {
   background-color: #fff;
   border-radius: 8px;
-  padding: 2rem;
   text-align: left; /* Align text to the left */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
 }
-
+.special-item > div {
+  padding: 1rem;
+}
 .special-item img {
   max-width: 100%;
-  height: 150px; /* Fixed height for specials images */
   object-fit: cover; /* Maintain aspect ratio */
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -236,43 +354,53 @@ nav li a:hover {
   flex-direction: column; /* Stack vertically initially */
   align-items: center; /* Center content horizontally */
 }
-
+.about .container h2 {
+  color: #4c6043;
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+}
 .about img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 2rem; /* Space between image and text */
+  width: 280px;
+  border-radius: 16px;
 }
 
 @media (min-width: 768px) {
   .about .container {
-    flex-direction: row;
     align-items: flex-start; /* Align items to the top */
+    flex-direction: row; /* Stack vertically initially */
   }
 
   .about img {
+    width: 512px;
     margin-bottom: 0;
-    margin-right: 2rem; /* Space between image and text */
   }
 }
 
 /* Footer - Flexbox */
-footer {
+.footer {
   background-color: #4c6043;
   color: white;
   padding: 2rem 0;
-  text-align: center; /* Center text initially */
+  text-align: left; /* Center text initially */
 }
-
+.footer img {
+  filter: brightness(15);
+}
 .footer .container {
   display: flex;
-  flex-direction: row; /* Stack columns vertically */
+  flex-direction: column; /* Stack columns vertically */
   gap: 2rem;
+  align-items: flex-start;
 }
-
+.footer .container > div {
+  flex: 1;
+}
+.footer .container div > * {
+  flex: 1;
+}
 .footer .footer-content {
   display: flex;
-  flex-direction: row; /* Stack columns vertically */
+  flex-direction: column; /* Stack columns vertically */
   gap: 2rem;
 }
 
@@ -307,13 +435,304 @@ footer {
     text-align: left; /* Left align text on larger screens */
   }
 
-  .footer {
+  .footer .container {
     flex-direction: row;
     justify-content: space-between; /* Distribute columns evenly */
     align-items: flex-start;
+  }
+  .footer .footer-content {
+    display: flex;
+    flex-direction: row; /* Stack columns vertically */
+    gap: 2rem;
   }
 
   .footer > * {
     margin-bottom: 0;
   }
+}
+
+/* BookingPage.css */
+.booking-page {
+  padding: 40px 0;
+  background-color: #f8f9fa; /* Light gray background */
+}
+
+.booking-page .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booking-page h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.booking-page p {
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.booking-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.available-slots,
+.booked-times {
+  flex: 1;
+}
+
+.booking-slots {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(150px, 1fr)
+  ); /* Responsive grid */
+  gap: 10px;
+}
+
+.booking-slots li {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.booking-slots li.booked {
+  background-color: #f0f0f0; /* Light gray for booked slots */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0; /* Light gray for table header */
+}
+
+/* BookingForm.css */
+.booking-form {
+  display: grid;
+  gap: 20px;
+  max-width: 400px; /* Adjust as needed */
+  margin: 2rem auto; /* Center the form */
+}
+
+.form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.booking-form label {
+  font-weight: bold;
+}
+
+.booking-form input,
+.booking-form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.submit-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.submit-button:disabled {
+  background-color: #ccc; /* Gray out the button if disabled */
+  cursor: not-allowed;
+  color: white;
+}
+.not-available {
+  color: gray;
+  text-decoration: line-through;
+}
+
+/* index.css */
+
+/* ... your existing styles ... */
+
+/* About Page Styles */
+.about-page {
+  padding: 40px 0;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column; /* Stack image and text vertically on smaller screens */
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    flex-direction: row; /* Display side-by-side on larger screens */
+    align-items: flex-start;
+  }
+
+  .about-content img {
+    margin-right: 2rem;
+    width: 50%;
+  }
+
+  .about-content > div {
+    /* Target the text container */
+    width: 50%;
+  }
+}
+
+.menu-page {
+  padding: 40px 0;
+}
+
+.menu-category {
+  margin-bottom: 3rem; 
+}
+
+.menu-category h3 {
+  color: #f4ce14; 
+  margin-bottom: 1rem; 
+}
+
+.menu-category ul {
+  list-style: none;
+  padding: 0; 
+}
+
+.menu-category li {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem; 
+}
+
+.menu-category li h4 {
+  margin-bottom: 0.5rem; 
+}
+
+.price {
+  float: right; 
+  font-weight: bold;
+}
+
+.order-online-page {
+  padding: 40px 0;
+}
+
+.menu-and-order {
+  display: flex;
+  flex-direction: column; /* Stack vertically on smaller screens */
+  gap: 2rem;
+}
+
+.menu-section, 
+.order-summary {
+  flex: 1; /* Make both sections take equal width */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.menu-section button {
+  /* Style the "Add to Order" buttons */
+  background: none; /* Remove default button background */
+  border: none;     /* Remove default button border */
+  padding: 0;       /* Remove default button padding */
+  font-family: inherit; /* Inherit font from the rest of the page */
+  cursor: pointer;   /* Make the cursor a pointer on hover */
+  text-align: left; 
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .menu-and-order {
+    flex-direction: row; /* Display side-by-side on larger screens */
+  }
+}
+
+.login-page {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: calc(100vh - 80px); 
+}
+
+.login-form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; 
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; 
+}
+
+.submit-button {
+  background-color: #f4ce14;
+  color: #4c6043;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #e6b800; 
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 15px;
 }

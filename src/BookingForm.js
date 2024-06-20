@@ -10,81 +10,104 @@ const BookingForm = ({
 
   const handleInputChange = (event) => {
     handleChange(event);
-
-    // Basic form validation - you can enhance this
     setFormIsValid(event.target.form.checkValidity());
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ display: "grid", maxWidth: "300px", gap: "20px" }}
+      className="booking-form"
       aria-label="Table Booking Form"
-      noValidate // Disable default browser validation for more control
+      noValidate
     >
       <h2>Reserve Your Table</h2>
+      <p style={{margin:0}}>
+        Welcome to our booking page! Please fill out the form below to make a
+        reservation.
+      </p>
+      <div className="form-group">
+        {" "}
+        {/* Group for date input */}
+        <label htmlFor="res-date">Choose date:</label>
+        <input
+          type="date"
+          id="res-date"
+          name="date"
+          value={formData.date}
+          onChange={handleInputChange}
+          required
+          aria-required="true"
+          aria-invalid={!formData.date}
+          aria-label="Choose Date"
+        />
+      </div>
 
-      <label htmlFor="res-date">Choose date:</label>
-      <input
-        type="date"
-        id="res-date"
-        name="date"
-        value={formData.date}
-        onChange={handleInputChange}
-        required // HTML5 validation: Required field
-        aria-required="true"
-        aria-invalid={!formData.date}
-        aria-label="Choose Date" // Added aria-label 
-      />
+      <div className="form-group">
+        {" "}
+        {/* Group for time select */}
+        <label htmlFor="res-time">Choose time:</label>
+        <select
+          id="res-time"
+          name="time"
+          value={formData.time}
+          onChange={handleInputChange}
+          required
+          aria-required="true"
+          aria-invalid={!formData.time}
+          aria-label="Choose Time"
+        >
+          <option value="">Select a Time</option>
+          {availableTimes.map((time) => (
+            <option key={time} value={time}>
+              {time}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <label htmlFor="res-time">Choose time:</label>
-      <select
-        id="res-time"
-        name="time"
-        value={formData.time}
-        onChange={handleInputChange}
-        required
-        aria-required="true"
-        aria-invalid={!formData.time}
-        aria-label="Choose Time" // Added aria-label 
+      <div className="form-group">
+        {" "}
+        {/* Group for guests input */}
+        <label htmlFor="guests">Number of guests:</label>
+        <input
+          type="number"
+          id="guests"
+          name="guests"
+          value={formData.guests}
+          onChange={handleInputChange}
+          min="1"
+          max="10"
+          required
+          aria-required="true"
+          aria-invalid={formData.guests < 1 || formData.guests > 10}
+          aria-label="Number of Guests"
+        />
+      </div>
+
+      <div className="form-group">
+        {" "}
+        {/* Group for occasion select */}
+        <label htmlFor="occasion">Occasion:</label>
+        <select
+          id="occasion"
+          name="occasion"
+          value={formData.occasion}
+          onChange={handleInputChange}
+          aria-label="Select an Occasion"
+        >
+          <option value="">Select an Occasion (optional)</option>
+          <option value="Birthday">Birthday</option>
+          <option value="Anniversary">Anniversary</option>
+          {/* Add more options as needed */}
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        disabled={!formIsValid}
+        className="submit-button"
+        aria-label="On Click"
       >
-        <option value="">Select a Time</option> {/* Default empty option */}
-        {availableTimes.map((time) => (
-          <option key={time} value={time}>
-            {time}
-          </option>
-        ))}
-      </select>
-
-      <label htmlFor="guests">Number of guests:</label>
-      <input
-        type="number"
-        id="guests"
-        name="guests"
-        value={formData.guests}
-        onChange={handleInputChange}
-        min="1" // HTML5 validation: Minimum value
-        max="10" // HTML5 validation: Maximum value
-        required
-        aria-required="true"
-        aria-invalid={formData.guests < 1 || formData.guests > 10}
-        aria-label="Number of Guests" // Added aria-label 
-      />
-
-      <label htmlFor="occasion">Occasion:</label>
-      <select
-        id="occasion"
-        name="occasion"
-        value={formData.occasion}
-        onChange={handleInputChange}
-        aria-label="Select an Occasion" // Added aria-label 
-      >
-        <option value="">Select an Occasion (optional)</option>
-        <option value="Birthday">Birthday</option>
-        <option value="Anniversary">Anniversary</option>
-      </select>
-
-      <button type="submit" disabled={!formIsValid} aria-label="On Click">
         Make Your reservation
       </button>
     </form>

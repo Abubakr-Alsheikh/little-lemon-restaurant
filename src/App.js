@@ -1,9 +1,14 @@
 import React, { useReducer, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import Main from "./Main";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BookingPage from "./BookingPage";
+import Main from "./Main";
+import AboutPage from './AboutPage';
+import MenuPage from './MenuPage';
+import OrderOnlinePage from './OrderOnlinePage';
+import LoginPage from './LoginPage';
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { fetchAPI, submitAPI } from "./api"; // Import fetchAPI
 import ConfirmedBooking from "./ConfirmedBooking";
 
@@ -28,9 +33,12 @@ export const reducer = (state, action) => {
   }
 };
 
+const storedBookings = localStorage.getItem("bookings");
+const initialBookings = storedBookings ? JSON.parse(storedBookings) : [];
+
 const initialState = {
   availableTimes: [], // Start empty, fetch on component mount
-  bookings: [],
+  bookings: initialBookings,
 };
 
 function App() {
@@ -71,28 +79,25 @@ function App() {
     <BrowserRouter>
       <>
         <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route
-              path="/order"
-              element={
-                <BookingPage
-                  availableTimes={state.availableTimes}
-                  dispatchTimes={dispatch}
-                  bookings={state.bookings}
-                  submitForm={submitForm} // Pass submitForm to BookingPage
-                />
-              }
-            />
-            <Route path="/confirmed" element={<ConfirmedBooking />} />
-            {/* <Route path="/about" element={<AboutPage />} />
-              <Route path="/menu" element={<MenuPage />} />
-              <Route path="/reservations" element={<ReservationsPage />} />
-              <Route path="/order-online" element={<OrderOnlinePage />} />
-              <Route path="/login" element={<LoginPage />} /> */}
-          </Routes>
-        </main>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route
+            path="/reservation"
+            element={
+              <BookingPage
+                availableTimes={state.availableTimes}
+                dispatchTimes={dispatch}
+                bookings={state.bookings}
+                submitForm={submitForm} // Pass submitForm to BookingPage
+              />
+            }
+          />
+          <Route path="/confirmed" element={<ConfirmedBooking />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/menu" element={<MenuPage />} />
+          <Route path="/order" element={<OrderOnlinePage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
         <Footer />
       </>
     </BrowserRouter>

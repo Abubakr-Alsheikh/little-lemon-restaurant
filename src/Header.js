@@ -1,33 +1,44 @@
-import React from 'react'
-import Nav from './Nav'
+// Header.js
+import React, { useState } from 'react';
+import Nav from './Nav';
 import { Link } from 'react-router-dom';
+import logo from './assest/logo.jpg';
 
 const Header = () => {
-    const navLinks = [
-        { text: 'Home', url: '/' },
-        { text: 'About', url: '/about' },
-        { text: 'Menu', url: '/menu' },
-        { text: 'Reservation', url: '/reservation' },
-        { text: 'Order Online', url: '/order' },
-        { text: 'Login', url: '/login' },
-    ];
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
-    return (
-        <header className='container'>
-            <Link to="/">
-                <img src="/logo.png" alt="Little Lemon Logo" />
-            </Link>
-            <nav>
-                <ul>
-                    {navLinks.map((link, index) => (
-                    <li key={index}>
-                        <Link to={link.url}>{link.text}</Link>
-                    </li>
-                    ))}
-                </ul>
-            </nav>
-        </header>
-    )
-}
+  const navLinks = [
+    { text: 'Home', url: '/' },
+    { text: 'About', url: '/about' },
+    { text: 'Menu', url: '/menu' },
+    { text: 'Reservation', url: '/reservation' },
+    { text: 'Order Online', url: '/order' },
+    { text: 'Login', url: '/login' },
+  ];
 
-export default Header
+  return (
+    <header className="container">
+      <Link to="/">
+        <img src={logo} width={164} alt="Little Lemon Logo" />
+      </Link>
+      <nav className="nav">
+        <a className="nav-toggle" onClick={() => setIsNavOpen(!isNavOpen)}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </a>
+        <ul className={isNavOpen ? 'nav-links show' : 'nav-links'}>
+          {navLinks.map((link, index) => (
+            <li key={index}>
+              <Link to={link.url} onClick={() => setIsNavOpen(false)}>
+                {link.text}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
