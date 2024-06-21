@@ -44,24 +44,21 @@ const Footer = () => {
             <h3>Social Media Links</h3>
             <ul>
               <li>
-                <a href="/">Home</a>
+                <a href="https://www.facebook.com/your-facebook-page" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-facebook-f"></i> Facebook
+                </a>
               </li>
               <li>
-                <a href="/about">About</a>
+                <a href="https://twitter.com/your-twitter-handle" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-twitter"></i> Twitter
+                </a>
               </li>
               <li>
-                <a href="/menu">Menu</a>
+                <a href="https://www.instagram.com/your-instagram-handle" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-instagram"></i> Instagram
+                </a>
               </li>
-              <li>
-                <a href="/reservations">Reservations</a>
-              </li>
-              <li>
-                <a href="/order">Order Online</a>
-              </li>
-              <li>
-                <a href="/login">Login</a>
-              </li>
-              {/* Add other social media links in a similar way */}
+              {/* Add more social media links here */}
             </ul>
           </div>
         </div>
