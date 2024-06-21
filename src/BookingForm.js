@@ -106,7 +106,7 @@ const BookingForm = ({
         type="submit"
         disabled={!formIsValid}
         className="submit-button"
-        aria-label="On Click"
+        aria-label="Make Your Reservation" // Set the aria-label
       >
         Make Your reservation
       </button>

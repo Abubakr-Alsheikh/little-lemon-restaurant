@@ -3,10 +3,10 @@ import Footer from "./Footer";
 import Header from "./Header";
 import BookingPage from "./BookingPage";
 import Main from "./Main";
-import AboutPage from './AboutPage';
-import MenuPage from './MenuPage';
-import OrderOnlinePage from './OrderOnlinePage';
-import LoginPage from './LoginPage';
+import AboutPage from "./AboutPage";
+import MenuPage from "./MenuPage";
+import OrderOnlinePage from "./OrderOnlinePage";
+import LoginPage from "./LoginPage";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { fetchAPI, submitAPI } from "./api"; // Import fetchAPI
@@ -23,7 +23,8 @@ export const reducer = (state, action) => {
     case "MAKE_BOOKING":
       return {
         ...state,
-        bookings: [...state.bookings, action.payload],
+        // Make sure bookings is an array even if it's not in the initial state:
+        bookings: [...(state.bookings || []), action.payload],
       };
     case "LOAD_BOOKINGS":
       // Update the bookings state with the loaded data

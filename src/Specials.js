@@ -4,6 +4,7 @@ import food1 from './assest/food-1.jpg'
 import food2 from './assest/food-2.jpg'
 import food3 from './assest/food-3.jpg'
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 const Specials = () => {
   const specialsData = [
@@ -34,7 +35,9 @@ const Specials = () => {
         <div className="container">
             <div>
                 <h2>This Week's Specials!</h2>
-                <Button text="Online Menu" />
+                <Link to="/menu">
+                  <Button text="Online Menu" />
+                </Link>
             </div>
             <div className="specials-grid">
                 {specialsData.map((special, index) => (
